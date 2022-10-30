@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output/tailwind.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="flex flex-row bg-slate-700  text-white justify-between py-2">
+        <div class="mx-8 flex flex-row">
+            <img class="w-20 h-20 rounded" src="images/MEC_LOGO.png" alt="MEC_LOGO">
+            <div class="shrink-0 ml-2 mt-2">
+                <h1 class="text-2xl bold">Central Library</h1>
+                <p class="text-xl">Mymensingh Engineering College</p>
+            </div>
+        </div>
+        <div class="flex flex-row">
+            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+            <div class="text-red-400 flex flex-col">
+                <div class="">
+                    Library Closed for today
+                </div>
+            </div>
+        </div>
+        <div class="mr-4 mt-4">
+            <button class=" bg-blue-700 hover:bg-blue-500 px-8 rounded py-2"><a href="">Login</a></button>
+            <button class="mr-4 bg-gray-500 hover:bg-gray-400 px-8 rounded py-2"><a href="">Sign Up</a></button>
+        </div>
+
+    </div>
+
+    <script>
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var pday = date.getDay();
+            var pmonth = date.getMonth();
+            var pyear = date.getFullYear();
+            var session = "AM";
+            if (h == 0) {
+                h = 12;
+            }
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+
+            setTimeout(showTime, 1000);
+
+        }
+        function showDate(){
+            var pday = date.getDay();
+            var pmonth = date.getMonth();
+            var pyear = date.getFullYear();
+            var date =  pday+"/"+pmonth+"/"+pyear;
+            document.getElementById("MyDayDisplay").innerText = "Sujan";
+            document.getelemntbyid("MyDaydisplay").textContent = "sdf ";
+            setTimeout(showDate,10)
+        }
+
+        showTime();
+        showDate();
+    </script>
+</body>
+
+</html>
