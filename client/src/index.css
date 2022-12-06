@@ -1,0 +1,11 @@
+@tailwind;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  * {
+    margin: 0;
+  }
+  ul li {
+    list-style: none;
+  }
+}

@@ -1,3 +1,0 @@
-# CentralLib-MEC
-
-Main branch
