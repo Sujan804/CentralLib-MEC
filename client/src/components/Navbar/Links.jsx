@@ -6,7 +6,7 @@ export const Links = () => {
       <li>
         <Link
           to="/"
-          className="py-7 px-2 inline-block no-underline text-black font-bold hover:font-extrabold"
+          className="py-7 px-2 inline-block no-underline text-white font-bold hover:font-extrabold"
         >
           Home
         </Link>
@@ -14,7 +14,7 @@ export const Links = () => {
       <li>
         <Link
           to="/about"
-          className="py-7 px-2 inline-block  no-underline text-black font-bold"
+          className="py-7 px-2 inline-block  no-underline text-white font-bold"
         >
           About
         </Link>
@@ -22,7 +22,7 @@ export const Links = () => {
       <li>
         <Link
           to="/e-books"
-          className="py-7 px-2 inline-block no-underline text-black font-bold"
+          className="py-7 px-2 inline-block no-underline text-white font-bold"
         >
           E-Books
         </Link>
@@ -30,7 +30,7 @@ export const Links = () => {
       <li>
         <Link
           to="/e-journals"
-          className="py-7 px-2 inline-block no-underline text-black font-bold"
+          className="py-7 px-2 inline-block no-underline text-white font-bold"
         >
           E-Journals
         </Link>
@@ -38,7 +38,7 @@ export const Links = () => {
       <li>
         <Link
           to="/institutional-repository"
-          className="py-7 px-2 inline-block no-underline text-black font-bold"
+          className="py-7 px-2 inline-block no-underline text-white font-bold"
         >
           Institutional Repository
         </Link>
