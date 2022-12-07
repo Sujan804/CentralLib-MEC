@@ -8,4 +8,8 @@
   ul li {
     list-style: none;
   }
+  .searchbox {
+    display: flex;
+    justify-content: flex-start;
+  }
 }

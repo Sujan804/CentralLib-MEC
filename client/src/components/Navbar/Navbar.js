@@ -49,9 +49,11 @@ const Navbar = () => {
         {/* Mobile Nav */}
         {
             <ul className={`
-            md:hidden bg-slate-600 fixed w-full top-0 overflow-y-auto bottom-0 py-20 pl-4 ml-0
+            md:hidden bg-slate-600 z-10 fixed w-full top-0 overflow-y-auto bottom-0 py-20 pl-4 ml-0
             duration-500 ${open ? "left-0" : "left-[-120%]"}
-            `}>
+            `}
+            onClick={()=>setOpen(!open)}
+            >
             {/* <li><Link to='/' className='py-7 px-2 inline-block'>Home</Link></li> */}
             <Links/>
             <div onClick={()=>{setLogged(!logged)}}>
