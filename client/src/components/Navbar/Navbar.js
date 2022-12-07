@@ -56,8 +56,8 @@ const Navbar = () => {
             {/* <li><Link to='/' className='py-7 px-2 inline-block'>Home</Link></li> */}
             <Links/>
             <div onClick={()=>{setLogged(!logged)}}>
-            {logged?
-                    <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
+            { logged?
+                    <div className='flex md:gap-2 justify-evenly'>
                         <Link to="/sign-up" className=' text-white no-underline'>
                            <button className='px-9 py-3 rounded-sm bg-blue-600 text-white hover:bg-blue-800 border-none'>Sign Up</button>
                         </Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     :
-                    <div className='hidden md:block'>
+                    <div className='md:block'>
                        <Link to="/profile" className=' text-white no-underline'>
                            <button className='px-9 py-3 rounded-sm bg-blue-600 text-white hover:bg-blue-800 border-none'>Profile</button>
                         </Link>

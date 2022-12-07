@@ -1,5 +1,6 @@
 import Login from "./components/Login";
 import Navbar from "./components/Navbar/Navbar";
+import SignUp from "./components/SignUp";
 function App() {
   return(
     <div>
@@ -8,6 +9,7 @@ function App() {
           SOMETHING
       </section>
       <Login/>
+      <SignUp/>
     </div>
   )
 }
