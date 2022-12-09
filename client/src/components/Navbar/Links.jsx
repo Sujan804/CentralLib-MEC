@@ -43,6 +43,14 @@ export const Links = () => {
           Institutional Repository
         </Link>
       </li>
+      <li>
+        <Link
+          to="/admin/dashboard"
+          className="py-7 px-2 inline-block no-underline text-white font-bold"
+        >
+          Dashboard
+        </Link>
+      </li>
     </>
   );
 };

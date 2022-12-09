@@ -12,7 +12,7 @@ export const About = () => {
               <img
                 src={profilePic}
                 alt=""
-                className="rounded-md w-16 h-24 md:h-32 md:w-32 text-right"
+                className="rounded-md w-16 h-24 md:h-32 md:w-32 text-right outline-double"
               ></img>
             </div>
 
@@ -28,7 +28,7 @@ export const About = () => {
               <img
                 src={profilePic}
                 alt=""
-                className="rounded-md w-16 h-24 md:h-32 md:w-32 text-right"
+                className="rounded-md w-16 h-24 md:h-32 md:w-32 text-right outline-double"
               ></img>
             </div>
 

@@ -12,4 +12,7 @@
     display: flex;
     justify-content: flex-start;
   }
+  .side-nav {
+    background-color: #5a1917;
+  }
 }
