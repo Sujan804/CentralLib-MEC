@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { About } from './components/About';
 import Activity from './components/Admin/Activity';
-import { AddBooks } from './components/Admin/AddBooks';
+import AddBooks from './components/Admin/AddBooks';
 import AddStudent from './components/Admin/AddStudent';
 import IssueRequests from './components/Admin/IssueRequests';
 import SearchBooks from './components/Admin/SearchBooks';
@@ -21,7 +21,7 @@ function App() {
   return(
     <div>
       <Navbar/>
-        
+    
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
