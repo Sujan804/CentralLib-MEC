@@ -2,7 +2,7 @@ import React from "react";
 import profilePic from "../assets/images/profile.jpg";
 export const About = () => {
   return (
-    <section className="min-h-screen p-2">
+    <section className="min-h-screen md:m-32 m-2">
       <div className=" m-4">
         <h1>Librarian</h1>
         <hr></hr>
@@ -19,7 +19,7 @@ export const About = () => {
             <div className="col-span-2">
               <h1 className="text-xl">Mr Jonk Kuk</h1>
               <h2 className="text-lg">Assistitant Librarian</h2>
-              <email>mrjungkuk@gmail.com</email>
+              <a href="mailto:mrjungkuk@gmail.com">mrjungkuk@gmail.com</a>
               <p>Phone: 019********</p>
             </div>
           </div>
@@ -35,7 +35,7 @@ export const About = () => {
             <div className="col-span-2">
               <h1 className="text-xl">Mr Jonk Kuk</h1>
               <h2 className="text-lg">Assistitant Librarian</h2>
-              <email>mrjungkuk@gmail.com</email>
+              <a href="mailto:mrjungkuk@gmail.com">mrjungkuk@gmail.com</a>
               <p>Phone: 019********</p>
             </div>
           </div>

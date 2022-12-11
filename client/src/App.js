@@ -4,10 +4,12 @@ import { About } from './components/About';
 import Activity from './components/Admin/Activity';
 import AddBooks from './components/Admin/AddBooks';
 import AddStudent from './components/Admin/AddStudent';
+import AdminHome from './components/Admin/AdminHome';
 import IssueRequests from './components/Admin/IssueRequests';
 import SearchBooks from './components/Admin/SearchBooks';
 import SearchStudents from './components/Admin/SearchStudents';
 import Settings from './components/Admin/Settings';
+import ViewStudent from './components/Admin/ViewStudent';
 import EBooks from './components/EBooks';
 import EJournal from './components/EJournal';
 import Footer from './components/Footer';
@@ -34,6 +36,7 @@ function App() {
           <Route path='/institutional-repository' element={<InstitutionalRepo/>}></Route>
 
           {/* Admin Route */}
+          <Route path='/admin' element = {<AdminHome/>}/>
           <Route path='/admin/issue-requests' element={<IssueRequests/>}></Route>
           <Route path='/admin/add-students' element={<AddStudent/>}></Route>
           <Route path='/admin/add-books' element={<AddBooks/>}></Route>
@@ -41,6 +44,7 @@ function App() {
           <Route path='/admin/search-students' element={<SearchStudents/>}></Route>
           <Route path='/admin/search-books' element={<SearchBooks/>}></Route>
           <Route path='/admin/settings' element={<Settings/>}></Route>
+          <Route path='/admin/student/:id' element={<ViewStudent/>}></Route>
 
         </Routes>
       <Footer/>

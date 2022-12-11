@@ -1,9 +1,9 @@
 import { BsSearch } from "react-icons/bs";
 const Home = () => {
   return (
-    <section>
+    <section className=" md:mx-24 m-2">
       <div className="py-10">
-        <h1 className="text-center mb-4">Library Catalog here</h1>
+        <h1 className="text-center mb-4">Search Books</h1>
         <div className="rounded-md flex justify-center">
           <div className="m-0 p-0">
             <select className="py-2.5 md:py-3 left-10 block w-16  text-sm md:text-lg md:mx-auto md:w-24 rounded-l-md ">
@@ -28,7 +28,7 @@ const Home = () => {
       </div>
       <div>
         <h1 className="text-3xl text-center">Books</h1>
-        <div className="grid grid-cols-1 md:grid-cols-4 ">
+        <div className="grid grid-cols-1 md:grid-cols-5 ml-6 md:mx-auto">
           <div className=" h-56 w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img

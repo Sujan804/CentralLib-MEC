@@ -16,45 +16,45 @@ const AdminSidebar = () => {
       </div>
       <u>
         <Link to="/admin/issue-requests" className="underline ">
-          <div className="text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <GoRequestChanges className=" p-1 text-center" />
 
             <p className="hidden md:block ml-2 uppercase">Issue Request</p>
           </div>
         </Link>
         <Link to="/admin/add-students" className="no-underline">
-          <div className="mt-4 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-4 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <MdPersonAdd className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Add Students</p>
           </div>
         </Link>
         <Link to="/admin/add-books" className="mt-4">
-          <div className="mt-6 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-6 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <ImBooks className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Add Books</p>
           </div>
         </Link>
         <Link to="/admin/search-students" className="no-underline">
-          <div className="mt-4 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-4 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <RiUserSearchFill className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Search Students</p>
           </div>
         </Link>
         <Link to="/admin/search-books" className="mt-4">
-          <div className="mt-6 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-6 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <AiOutlineFileSearch className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Search Books</p>
           </div>
         </Link>
 
         <Link to="/admin/activity" className="mt-4">
-          <div className="mt-6 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-6 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <FiActivity className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Activity</p>
           </div>
         </Link>
         <Link to="/admin/settings" className="mt-4">
-          <div className="mt-6 text-black text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
+          <div className="mt-6 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <IoSettingsSharp className=" p-1 text-center" />
             <p className="hidden md:block ml-2 uppercase">Settings</p>
           </div>
