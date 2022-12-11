@@ -1,5 +1,6 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import profilePic from "../../assets/images/profile.jpg";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const SearchStudents = () => {
@@ -53,9 +54,11 @@ const SearchStudents = () => {
               <p>Reg No: 804</p>
             </div>
             <div className="items-end flex">
-              <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
-                View Student
-              </button>
+              <Link to="/admin/student/1">
+                <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
+                  View Student
+                </button>
+              </Link>
             </div>
           </div>
         </div>

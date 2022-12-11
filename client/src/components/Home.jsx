@@ -29,7 +29,7 @@ const Home = () => {
       <div>
         <h1 className="text-3xl text-center">Books</h1>
         <div className="grid grid-cols-1 md:grid-cols-5 ml-6 md:mx-auto">
-          <div className=" h-56 w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -38,11 +38,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -51,11 +56,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -64,11 +74,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -77,11 +92,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -90,11 +110,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -103,11 +128,16 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
-          <div className="h-56 w-48 bg-teal-400 rounded-lg hover:shadow-lg mx-12  hover:scale-125 mb-4">
+          <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4">
             <div className="">
               <img
                 className="w-48 h-36 rounded-t-lg"
@@ -116,8 +146,13 @@ const Home = () => {
               ></img>
             </div>
             <div className="text-center">
-              <h3>Data Structure and Algorithm</h3>
-              <h4>Writer:Harverd Shidlt</h4>
+              <h3 className="text-md">Data Structure and Algorithm</h3>
+              <h4 className="text-sm">Writer:Harverd Shidlt</h4>
+              <div className="text-right mr-2 mb-1">
+                <button className="p-1 bg-sky-700 hover:bg-sky-800 rounded-md text-white">
+                  Place Hold
+                </button>
+              </div>
             </div>
           </div>
         </div>

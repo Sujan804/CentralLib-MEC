@@ -18,7 +18,14 @@ const ViewStudent = () => {
           <h2 className="text-lg">1819084</h2>
           <p>Session: 2018-19</p>
           <p>Computer Science and Engineering</p>
-          <button className="my-2 py-1  text-white px-2 bg-yellow-700 hover:bg-yellow-800">
+          <p>
+            <a href="mailto:johndoew@gmail.com">johndoe@gmail.com</a>
+          </p>
+          <p className="mb-3">
+            {" "}
+            <a href="tel:1101010">019********</a>
+          </p>
+          <button className=" my-2 py-1  text-white px-2 bg-yellow-700 hover:bg-yellow-800">
             Send Notifications
           </button>
           <button className="ml-5 my-2 py-1  text-white px-2 bg-red-700 hover:bg-red-800">

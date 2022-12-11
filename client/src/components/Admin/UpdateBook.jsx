@@ -1,13 +1,12 @@
 import React from "react";
 import AdminSidebar from "./Sidebar/AdminSidebar";
-
-const AddBooks = () => {
+const UpdateBook = () => {
   return (
-    <section className="grid grid-cols-12  min-h-screen bg-yellow-50">
+    <section className="grid grid-cols-12  min-h-screen">
       <div className="col-span-1 md:col-span-2">
         <AdminSidebar />
       </div>
-      <div className="col-span-11 md:col-span-10 max-h-screen overflow-auto my-2">
+      <div className="col-span-11 md:col-span-10 max-h-screen overflow-auto">
         <div>
           <h1 className="text-center">Add New Books</h1>
         </div>
@@ -84,7 +83,7 @@ const AddBooks = () => {
             <input
               type="submit"
               value="Add Books"
-              className="w-64 md:w-96 bg-blue-800 hover:bg-blue-900 text-white rounded p-2 text-center"
+              className="w-64 md:w-96 bg-blue-900 text-white rounded p-2 text-center"
             />
           </form>
         </div>
@@ -93,4 +92,4 @@ const AddBooks = () => {
   );
 };
 
-export default AddBooks;
+export default UpdateBook;

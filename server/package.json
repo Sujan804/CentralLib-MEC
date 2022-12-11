@@ -6,13 +6,8 @@
   "scripts": {
     "start": "nodemon run app.js"
   },
- 
   "author": "Sujan804",
   "license": "ISC",
-  "bugs": {
-    // "url": "https://github.com/Sujan804/CentralLib-MEC/issues"
-  },
-  "homepage": "https://github.com/Sujan804/CentralLib-MEC#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

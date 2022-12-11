@@ -1,5 +1,6 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const SearchBooks = () => {
   return (
@@ -30,6 +31,92 @@ const SearchBooks = () => {
               </div>
               <div>
                 <BsSearch className="bg-blue-600 text-3xl text-white py-1.5 px-4 rounded-r-md md:py-2.5 hover:bg-blue-700 md:w-20" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="text-right m-4">
+          <Link to="">
+            <h1>View all books</h1>
+          </Link>
+        </div>
+        <div className="m-2 md:m-16">
+          <div className="flex gap-1 md:gap-4 outline-double">
+            <img
+              src="https://images.unsplash.com/photo-1571167530149-c1105da4c2c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=376&q=80"
+              className="h-36 md:h-40 w-28"
+              alt=""
+            />
+            <div>
+              <h1 className="text-2xl">Data Structure and Algo</h1>
+              <h2 className="text-lg">Harved Shidlt</h2>
+              <p className="hidden md:block">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. amet
+                consectetur adipisicing elit.
+              </p>
+              <p className="hidden md:block">Last updated: {Date()}</p>
+              <p className="font-bold">Total Stock: 20</p>
+              <p className="font-bold text-red-900">Available Stock: 10</p>
+              <div className="text-right">
+                <Link to="/admin/book/1">
+                  <button className=" bg-yellow-700 hover:bg-yellow-800  text-white mr-2 px-4 py-1 rounded-md font-bold ">
+                    Update
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="m-2 md:m-16">
+          <div className="flex gap-1 md:gap-4 outline-double">
+            <img
+              src="https://images.unsplash.com/photo-1571167530149-c1105da4c2c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=376&q=80"
+              className="h-36 md:h-40 w-28"
+              alt=""
+            />
+            <div>
+              <h1 className="text-2xl">Data Structure and Algo</h1>
+              <h2 className="text-lg">Harved Shidlt</h2>
+              <p className="hidden md:block">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. amet
+                consectetur adipisicing elit.
+              </p>
+              <p className="hidden md:block">Last updated: {Date()}</p>
+              <p className="font-bold">Total Stock: 20</p>
+              <p className="font-bold text-red-900">Available Stock: 10</p>
+              <div className="text-right">
+                <Link to="/admin/book/1">
+                  <button className=" bg-yellow-700 hover:bg-yellow-800  text-white mr-2 px-4 py-1 rounded-md font-bold ">
+                    Update
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="m-2 md:m-16">
+          <div className="flex gap-1 md:gap-4 outline-double">
+            <img
+              src="https://images.unsplash.com/photo-1571167530149-c1105da4c2c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=376&q=80"
+              className="h-36 md:h-40 w-28"
+              alt=""
+            />
+            <div>
+              <h1 className="text-2xl">Data Structure and Algo</h1>
+              <h2 className="text-lg">Harved Shidlt</h2>
+              <p className="hidden md:block">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. amet
+                consectetur adipisicing elit.
+              </p>
+              <p className="hidden md:block">Last updated: {Date()}</p>
+              <p className="font-bold">Total Stock: 20</p>
+              <p className="font-bold text-red-900">Available Stock: 10</p>
+              <div className="text-right">
+                <Link to="/admin/book/1">
+                  <button className=" bg-yellow-700 hover:bg-yellow-800  text-white mr-2 px-4 py-1 rounded-md font-bold ">
+                    Update
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

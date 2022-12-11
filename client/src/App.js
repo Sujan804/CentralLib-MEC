@@ -9,6 +9,7 @@ import IssueRequests from './components/Admin/IssueRequests';
 import SearchBooks from './components/Admin/SearchBooks';
 import SearchStudents from './components/Admin/SearchStudents';
 import Settings from './components/Admin/Settings';
+import UpdateBook from './components/Admin/UpdateBook';
 import ViewStudent from './components/Admin/ViewStudent';
 import EBooks from './components/EBooks';
 import EJournal from './components/EJournal';
@@ -45,6 +46,7 @@ function App() {
           <Route path='/admin/search-books' element={<SearchBooks/>}></Route>
           <Route path='/admin/settings' element={<Settings/>}></Route>
           <Route path='/admin/student/:id' element={<ViewStudent/>}></Route>
+          <Route path='/admin/book/:id' element ={<UpdateBook/>}></Route>
 
         </Routes>
       <Footer/>
