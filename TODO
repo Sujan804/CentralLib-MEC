@@ -1,2 +1,4 @@
 
 .env File is not working in src/database/connect.js
+>>>Solution:
+    Have to require dotenv and config
