@@ -1,6 +1,7 @@
 const User = require('../model/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+
 const register = async (req,res,next)=>{
     const {email, password} = req.body
     console.log(req.body.email)
@@ -86,5 +87,21 @@ const login = async (req,res,next)=>{
    
 
 }
+const profile = async (req,res,next)=>{
+    console.log("Come to the profile")
+    res.status(200).send({
+        message: "Successfull"
+    })
+}
+const logout = async (req,res,next)=>{
+    console.log("hi from logut")
+    req.logout((err)=>{
+        if(err){
+            return next(err);
+        }else{
+            return redirect('/')
+        }
+    })
+}
 
-module.exports = {register,login}
+module.exports = {register,login,profile,logout}
