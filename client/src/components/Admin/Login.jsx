@@ -15,7 +15,7 @@ export default function Login() {
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             <form>
               <div className="flex flex-row items-center justify-center lg:justify-start">
-                <p className="mb-4 mr-4 text-3xl">Login</p>
+                <p className="mb-4 mr-4 text-3xl">Admin Login</p>
               </div>
               <div className="mb-6">
                 <input
