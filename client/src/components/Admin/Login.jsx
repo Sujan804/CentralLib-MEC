@@ -1,6 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [errFlag, setErrFlag] = useState(false);
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const collegeId = id;
+    await axios
+      .post("http://localhost:5000/admin/login", {
+        collegeId,
+        password,
+      })
+      .then((res) => {
+        navigate("/admin");
+        // else {
+        //   setError(res.message);
+        //   setErrFlag(true);
+        //   setTimeout(() => {
+        //     setErrFlag(false);
+        //   }, 3000);
+        // }
+      })
+      .catch((err) => {
+        setError(err.message);
+        setError(true);
+        setTimeout(() => {
+          setErrFlag(false);
+        }, 3000);
+      });
+  };
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -13,15 +45,23 @@ export default function Login() {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={onSubmitHandler}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Login</p>
+              </div>
+              <div>
+                {errFlag && (
+                  <p className="text-red-700 bg-blue-200 rounded-md py-3 px-6">
+                    {error}
+                  </p>
+                )}
               </div>
               <div className="mb-6">
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="collegeId"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
                   placeholder="ex: 1819084"
                 />
               </div>
@@ -29,7 +69,8 @@ export default function Login() {
                 <input
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="userPassword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
               </div>
@@ -51,14 +92,13 @@ export default function Login() {
               </div>
 
               <div className="text-center lg:text-left">
-                <Link to="/profile">
-                  <button
-                    type="button"
+                <div className="text-center lg:text-left">
+                  <input
                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  >
-                    Login
-                  </button>
-                </Link>
+                    type="submit"
+                    value="Login"
+                  />
+                </div>
 
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?

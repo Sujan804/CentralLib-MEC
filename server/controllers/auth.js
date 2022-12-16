@@ -26,4 +26,42 @@ const adminSignUp = async (req,res,next)=>{
     }
     
 }
-module.exports = {adminSignUp}
+
+const adminLogin = async (req,res,next)=>{
+    console.log("Hello from login")
+    try {
+        const {collegeId,password} = req.body
+        console.log(collegeId)
+        console.log(password)
+        const user = await User.findOne({collegeId: collegeId});
+        if(!user){
+            res.status(403).send({
+                success: false,
+                message: "User not found",
+            })
+        }else{
+            if(user.password === password){
+                
+                res.status(200).send({
+                    success: true,
+                    message: "User found on database",
+                    user: {
+                        ...user
+                    }
+                })
+            }else{
+                res.status(403).send({
+                    success: false,
+                    message: "Incorrect password!"
+                })
+            }
+        }
+      
+    } catch (error) {
+        res.status(403).send({
+            success: false,
+            message: "Server Error!"
+        })
+    }
+}
+module.exports = {adminSignUp, adminLogin}

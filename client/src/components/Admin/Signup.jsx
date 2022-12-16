@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export default function SignUp() {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [refId, setRefId] = useState("");
-
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const onSubmitHandler = async (e) => {
     const collegeId = id;
     const isAdmin = true;
@@ -21,12 +23,13 @@ export default function SignUp() {
       })
       .then((res) => {
         if (res.data.success) {
+          navigate("/admin/login");
+          setError("ADDED Successfully");
           console.log("Successfully created");
-          return redirect("/admin");
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 
@@ -46,6 +49,7 @@ export default function SignUp() {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Signup</p>
               </div>
+              <p>{error}</p>
               <div className="mb-6">
                 <label>Name</label>
                 <input
