@@ -14,23 +14,30 @@ export default function SignUp() {
     const collegeId = id;
     const isAdmin = true;
     e.preventDefault();
-    await axios
-      .post("http://localhost:5000/admin/signup", {
-        name,
-        collegeId,
-        password,
-        isAdmin,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          navigate("/admin/login");
-          setError("ADDED Successfully");
-          console.log("Successfully created");
-        }
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+    if (password !== confirmPassword) {
+      setError("Password not matched");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
+    } else {
+      await axios
+        .post("http://localhost:5000/admin/signup", {
+          name,
+          collegeId,
+          password,
+          isAdmin,
+        })
+        .then((res) => {
+          if (res.data.success) {
+            navigate("/admin/login");
+            setError("ADDED Successfully");
+            console.log("Successfully created");
+          }
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
+    }
   };
 
   return (
@@ -49,7 +56,7 @@ export default function SignUp() {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Signup</p>
               </div>
-              <p>{error}</p>
+              <p className="text-red-900 text-lg ">{error}</p>
               <div className="mb-6">
                 <label>Name</label>
                 <input
@@ -99,7 +106,7 @@ export default function SignUp() {
                 />
               </div>
               <div className="mb-6">
-                <label>Refference Id(Any existing Admin Id)</label>
+                <label>Admin Code</label>
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

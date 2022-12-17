@@ -1,16 +1,22 @@
+
+//Requiring neccessary package
 const express = require('express')
 const env = require('dotenv')
 const app = express();
 const adminRoute = require('./routes/admin')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const cors = require('cors')
+const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
 
 // env configuration
 env.config();
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser())
+
 /// Database connection
 
 mongoose.connect(process.env.MONGO_URL)
@@ -20,8 +26,23 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err)=>{
     console.log(err)
 })
-
-
+require('./config/passport');
+// setting passport session middleware
+app.set('trust proxy',1);
+app.use(
+    session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: true,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URL,
+            collectionName: "sessions"
+        }),
+        cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    })
+)
+app.use(passport.initialize());
+app.use(passport.session())
 
 // Routes
 app.use('/admin', adminRoute)

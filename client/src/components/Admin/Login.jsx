@@ -16,18 +16,19 @@ export default function Login() {
         password,
       })
       .then((res) => {
-        navigate("/admin");
-        // else {
-        //   setError(res.message);
-        //   setErrFlag(true);
-        //   setTimeout(() => {
-        //     setErrFlag(false);
-        //   }, 3000);
-        // }
+        console.log(res);
+        if (res.data.success) navigate("/admin");
+        else {
+          setError(res.data.message);
+          setErrFlag(true);
+          setTimeout(() => {
+            setErrFlag(false);
+          }, 3000);
+        }
       })
       .catch((err) => {
         setError(err.message);
-        setError(true);
+        setErrFlag(true);
         setTimeout(() => {
           setErrFlag(false);
         }, 3000);
@@ -63,6 +64,7 @@ export default function Login() {
                   value={id}
                   onChange={(e) => setId(e.target.value)}
                   placeholder="ex: 1819084"
+                  required
                 />
               </div>
               <div className="mb-6">
@@ -72,6 +74,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  required
                 />
               </div>
 
@@ -90,7 +93,6 @@ export default function Login() {
                   Forgot password?
                 </a>
               </div>
-
               <div className="text-center lg:text-left">
                 <div className="text-center lg:text-left">
                   <input

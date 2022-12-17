@@ -1,7 +1,6 @@
 const User = require("../models/user")
 const adminSignUp = async (req,res,next)=>{
     try{
-       
         const newAdmin = new User({
             ...req.body
         })
@@ -28,20 +27,18 @@ const adminSignUp = async (req,res,next)=>{
 }
 
 const adminLogin = async (req,res,next)=>{
-    console.log("Hello from login")
     try {
         const {collegeId,password} = req.body
-        console.log(collegeId)
-        console.log(password)
+        console.log(collegeId + " " + password)
         const user = await User.findOne({collegeId: collegeId});
         if(!user){
-            res.status(403).send({
+            res.status(200).send({
                 success: false,
                 message: "User not found",
             })
         }else{
             if(user.password === password){
-                
+               
                 res.status(200).send({
                     success: true,
                     message: "User found on database",
@@ -50,7 +47,7 @@ const adminLogin = async (req,res,next)=>{
                     }
                 })
             }else{
-                res.status(403).send({
+                res.status(200).send({
                     success: false,
                     message: "Incorrect password!"
                 })
