@@ -1,4 +1,6 @@
+const jwt = require('jsonwebtoken')
 const User = require("../models/user")
+require('dotenv').config()
 const adminSignUp = async (req,res,next)=>{
     try{
        
@@ -35,19 +37,23 @@ const adminLogin = async (req,res,next)=>{
         console.log(password)
         const user = await User.findOne({collegeId: collegeId});
         if(!user){
-            res.status(403).send({
+            res.status(404).send({
                 success: false,
                 message: "User not found",
             })
         }else{
             if(user.password === password){
                 
+                const payload = {
+                    collegeId : user.collegeId,
+                }
+                const token = jwt.sign(payload, process.env.SECRET_KEY,{
+                    expiresIn : '2h'
+                })
                 res.status(200).send({
                     success: true,
-                    message: "User found on database",
-                    user: {
-                        ...user
-                    }
+                    message: "User is logged in successfully",
+                    token: "Bearer "+ token
                 })
             }else{
                 res.status(403).send({

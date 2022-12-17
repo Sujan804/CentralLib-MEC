@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [id, setId] = useState("");
@@ -7,6 +7,24 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [errFlag, setErrFlag] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:5000/admin", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.success) {
+          navigate("/admin");
+          // } else {
+        }
+      });
+  }, []);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const collegeId = id;
@@ -16,20 +34,26 @@ export default function Login() {
         password,
       })
       .then((res) => {
-        navigate("/admin");
-        // else {
-        //   setError(res.message);
-        //   setErrFlag(true);
-        //   setTimeout(() => {
-        //     setErrFlag(false);
-        //   }, 3000);
-        // }
+        if (res.data.success) {
+          localStorage.setItem("token", res.data.token);
+          console.log(res.data);
+          navigate("/admin");
+        } else {
+          setError(res.data.message);
+          setError(true);
+          setTimeout(() => {
+            setErrFlag(false);
+            setError("");
+          }, 3000);
+        }
       })
       .catch((err) => {
+        navigate("/admin/login");
         setError(err.message);
         setError(true);
         setTimeout(() => {
           setErrFlag(false);
+          setError("");
         }, 3000);
       });
   };

@@ -5,12 +5,21 @@ const adminRoute = require('./routes/admin')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const passport = require('passport')
+const User = require('./models/user')
 
 // env configuration
 env.config();
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser())
+
+//Pasport 
+app.use(passport.initialize());
+require('./config/passport');
+
+
 /// Database connection
 
 mongoose.connect(process.env.MONGO_URL)
@@ -20,6 +29,7 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err)=>{
     console.log(err)
 })
+//
 
 
 
