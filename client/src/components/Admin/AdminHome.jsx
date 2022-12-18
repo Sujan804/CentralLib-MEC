@@ -4,16 +4,28 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const AdminHome = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   try {
     useEffect(
       () => async () => {
         axios
-          .get("http://localhost:5000/admin/")
+          .get("http://localhost:5000/admin/", {
+            headers: {
+              Authorization: token,
+            },
+          })
           .then((res) => {
-            navigate("/admin");
+            console.log(res);
+            if (res.status === 200) navigate("/admin");
           })
           .catch((err) => {
-            navigate("/admin/login");
+            console.log(err.message);
+            const msg = err.message.split(" ");
+            if (msg.includes("401")) {
+              navigate("/admin/login");
+            }
+            console.log(msg);
+            // navigate("/admin/login");
           });
         // if (res) {
         //   console.log("::;");
@@ -24,10 +36,10 @@ const AdminHome = () => {
         //   navigate("admin/login");
         // }
       },
-      []
+      [token]
     );
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 
   return (
