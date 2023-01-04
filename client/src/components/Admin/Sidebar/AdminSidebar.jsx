@@ -10,10 +10,13 @@ import { Link } from "react-router-dom";
 const AdminSidebar = () => {
   return (
     <div className="bg-blue-900 min-h-screen max-h-screen text-white  top-0 -z-10">
+      <Link to='/admin'>
       <div className="flex items-center text-red-600 py-2 px-1 align-center text-2xl mb-2">
         <AiFillDashboard />
         <p className="ml-1 hidden md:block">Dashboard</p>
       </div>
+      </Link>
+      
       <u>
         <Link to="/admin/issue-requests" className="underline ">
           <div className="text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
@@ -37,7 +40,7 @@ const AdminSidebar = () => {
         <Link to="/admin/search-students" className="no-underline">
           <div className="mt-4 text-white text-lg side-nav p-1 flex items-center md:p-4 no-underline text-center">
             <RiUserSearchFill className=" p-1 text-center" />
-            <p className="hidden md:block ml-2 uppercase">Search Students</p>
+            <p className="hidden md:block ml-2 uppercase text-sm">Search Students</p>
           </div>
         </Link>
         <Link to="/admin/search-books" className="mt-4">
