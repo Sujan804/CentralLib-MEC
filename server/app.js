@@ -6,8 +6,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
-const passport = require('passport')
 const User = require('./models/user')
+const bookRoute = require('./routes/bookRoute')
 
 // env configuration
 env.config();
@@ -16,8 +16,6 @@ app.use(express.json())
 app.use(bodyParser())
 
 //Pasport 
-app.use(passport.initialize());
-require('./config/passport');
 
 
 /// Database connection
@@ -35,11 +33,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 // Routes
 app.use('/admin', adminRoute)
-app.get('/', (req,res,next)=>{
-    console.log(`Hi from client`)
-    res.send('<h1 style="color:white; text-align:center; padding:5px; background-color: green; border-radius: 20px; margin-top: 30px">Hi from client</h1>')
-})
-
+app.use('/book',bookRoute)
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT,()=>{
