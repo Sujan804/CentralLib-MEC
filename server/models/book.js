@@ -20,13 +20,14 @@ const bookSchema = new mongoose.Schema({
   isbn: {
     type: String,
     required: true,
-    unique: true
+    unique: false
   },
   description: {
     type: String
   },
   image: {
-    type: String
+    type: String,
+    default: ""
   },
   createdAt: {
     type: Date,

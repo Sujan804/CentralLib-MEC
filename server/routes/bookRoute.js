@@ -1,10 +1,13 @@
 const express = require('express');
 const Book = require('../models/book');
-
 const router = express.Router();
+const upload = require('../tools/uploadMiddleware')
+
+
 
 // Add a book
-router.post('/', (req, res) => {
+router.post('/books', upload.single('image'), (req, res) => {
+  console.log(req.body)
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -12,17 +15,18 @@ router.post('/', (req, res) => {
     department: req.body.department,
     isbn: req.body.isbn,
     description: req.body.description,
-    image: req.body.image
   });
-
+  console.log(book)
   book.save((error) => {
     if (error) {
+      console.log(error)
       res.status(500).send(error);
     } else {
       res.status(201).send(book);
     }
   });
 });
+
 
 // Update a book
 router.put('/:id', (req, res) => {
