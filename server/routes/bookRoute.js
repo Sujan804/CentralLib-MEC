@@ -7,7 +7,7 @@ const upload = require('../tools/uploadMiddleware')
 
 // Add a book
 router.post('/books', upload.single('image'), (req, res) => {
-  console.log(req.body)
+  console.log(req.file)
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -15,8 +15,9 @@ router.post('/books', upload.single('image'), (req, res) => {
     department: req.body.department,
     isbn: req.body.isbn,
     description: req.body.description,
+    image: req.file.path
   });
-  console.log(book)
+  // console.log(book)
   book.save((error) => {
     if (error) {
       console.log(error)

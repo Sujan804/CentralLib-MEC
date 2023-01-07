@@ -14,7 +14,7 @@ env.config();
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser())
-
+app.use(express.static(`${__dirname}` + `\\public\\`));
 //Pasport 
 
 
@@ -30,12 +30,14 @@ mongoose.connect(process.env.MONGO_URL)
 //
 
 
-
+console.log(__dirname+'/public')
 // Routes
 app.use('/admin', adminRoute)
 app.use('/book',bookRoute)
+app.use("/image" ,express.static("/images"))
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT,()=>{
+    console.log(`${__dirname}` + `\\public\\`)
     console.log(`Server is running on http://localhost:${PORT}`)
 })

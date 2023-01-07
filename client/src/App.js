@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { About } from './components/About';
 import Activity from './components/Admin/Activity';
 import AddBooks from './components/Admin/AddBooks';
@@ -25,7 +27,6 @@ function App() {
   return(
     <div>
       <Navbar/>
-    
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
@@ -51,6 +52,7 @@ function App() {
           <Route path='/admin/login' element={<LoginAdmin/>}/>
 
         </Routes>
+        <ToastContainer position="bottom-center" limit={1} />
       <Footer/>
     </div>
   )
