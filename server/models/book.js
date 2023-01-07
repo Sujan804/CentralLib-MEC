@@ -13,9 +13,13 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  stock: {
+    type: Number,
+    default: 0,
+    required: false
+  },
   department: {
     type: String,
-    required: true
   },
   isbn: {
     type: String,

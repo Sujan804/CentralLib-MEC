@@ -1,9 +1,83 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useReducer, useState } from "react";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        loading: false,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 const BookView = () => {
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: true,
+  });
+  const [books, setBooks] = useState([]);
+  try {
+    useEffect(() => {
+      dispatch({ type: "FETCH_REQUEST" });
+      const fetchBook = async () => {
+        const { data } = await axios.get("http://localhost:5000/book/all");
+        setBooks(data);
+        dispatch({ type: "FETCH_SUCCESS" });
+      };
+      fetchBook();
+      // console.log(books);
+    }, []);
+  } catch (error) {
+    dispatch({ type: "FETCH_FAIL" });
+  }
+  // console.log(books);
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 ml-6 md:mx-auto">
-      <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4 shadow-xl">
+      {books.map((book) => (
+        <div
+          key={book.image}
+          className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4 shadow-xl flex-col"
+        >
+          <div className="">
+            <img
+              className="w-48 h-48 rounded-t-lg"
+              src={`http://localhost:5000/images/${book.image}`}
+              alt=""
+            ></img>
+          </div>
+          <div className="italic">
+            <h3 className="text-md mx-1 text-center">{book.title}</h3>
+            <h4 className="text-sm mx-1 text-center">Writer:{book.author}</h4>
+            <div className="grid grid-cols-2">
+              <h1 className="ml-3 text-sm text-left">Stock : {book.stock}</h1>
+              <h1 className="text-sm text-right mr-3">
+                Available: {book.available || 0}
+              </h1>
+            </div>
+            <button className="p-2 bg-red-700 hover:bg-red-800 bold border-spacing-7 text-white min-w-full rounded-b-md ">
+              Send Request for the book
+            </button>
+          </div>
+        </div>
+      ))}
+      {/* <div className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4 shadow-xl">
         <div className="">
           <img
             className="w-48 h-48 rounded-t-lg"
@@ -42,7 +116,7 @@ const BookView = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -8,14 +8,14 @@ const userSchema = mongoose.Schema({
     },
     registration:{
         type: String,
-        unique: true,
+        // unique: true,
         trim: true,
         default: null
     },
     collegeId:{
         type: String,
         trim: true,
-        unique: true,
+        // unique: true,
         require: true
     },
     batchNo:{
@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema({
     phone:{
         type: String,
         trim:true,
-        unique: true,
+        // unique: true,
         default:null
     },
     password: {
@@ -52,17 +52,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: ""
     },
-    bookIssueInfo: [
-        {
-            book_info: {
-                id:{
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "Issue"
-                }
-            }
-        }
-        
-    ],
     isAdmin: {
         type: Boolean,
         default: false

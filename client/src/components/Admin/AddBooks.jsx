@@ -6,7 +6,7 @@ const AddBooks = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [stock, setStock] = useState();
-  const [department, setDepartment] = useState("CSE");
+  const [department, setDepartment] = useState("None");
   const [isbn, setIsbn] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -37,7 +37,7 @@ const AddBooks = () => {
           setStock("");
           setDepartment("");
           setDescription("");
-          setImage("");
+          setImage(null);
           setIsbn("");
         })
         .catch((error) => {
@@ -154,7 +154,7 @@ const AddBooks = () => {
                 type="textaria"
                 placeholder="A data structure is a named location that can be used to store and organize data..."
                 name="description"
-                className="m-2 w-64  h-10 md:h-20 md:w-96"
+                className="m-2 w-64  h-10 md:h-20 md:w-96 text-lg"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>

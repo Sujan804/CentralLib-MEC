@@ -12,10 +12,11 @@ router.post('/books', upload.single('image'), (req, res) => {
     title: req.body.title,
     author: req.body.author,
     stock: req.body.stock,
+    available: req.body.stock,
     department: req.body.department,
     isbn: req.body.isbn,
     description: req.body.description,
-    image: req.file.path
+    image: req.file.filename
   });
   // console.log(book)
   book.save((error) => {
@@ -49,6 +50,15 @@ router.delete('/:id', (req, res) => {
       res.status(204).send();
     }
   });
+});
+router.get('/all', async (req, res) => {
+  try {
+    const books = await Book.find();
+    console.log(books)
+    res.send(books);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 // Search for books
 router.get('', (req, res) => {

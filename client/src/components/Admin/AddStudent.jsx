@@ -1,7 +1,55 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import AdminSidebar from "./Sidebar/AdminSidebar";
-
 const AddStudent = () => {
+  const [name, setName] = useState("");
+  const [registration, setRegistration] = useState("");
+  const [collegeId, setCollegeId] = useState("");
+  const [batchNo, setBatchNo] = useState("");
+  const [department, setDepartment] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(name);
+    try {
+      const result = await axios.post(
+        "http://localhost:5000/user",
+        {
+          name,
+          registration,
+          collegeId,
+          batchNo,
+          department,
+          email,
+          phone,
+          password,
+          image,
+        },
+        {
+          "Content-Type": "multipart/form-data",
+        }
+      );
+      setName("");
+      setBatchNo("");
+      setDepartment("CSE");
+      setEmail("");
+      setPassword("");
+      setPhone("");
+      setImage(null);
+      setRegistration("");
+      setCollegeId("");
+      console.log(result.data);
+      toast.success("Student Added");
+    } catch (error) {
+      toast.error(error.message);
+      console.error(error);
+    }
+  };
   return (
     <section className="grid grid-cols-12  min-h-screen bg-yellow-50">
       <div className="col-span-1 md:col-span-2">
@@ -12,7 +60,7 @@ const AddStudent = () => {
           <h1 className="text-center">Add New Student</h1>
         </div>
         <div className="mr-6 mt-4 text-center">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="uppercase font-bold block">
                 Full Name
@@ -20,8 +68,9 @@ const AddStudent = () => {
               <input
                 type="text"
                 placeholder="John Doe"
-                name="name"
-                className="m-2 w-64 h-6 md:w-96"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
             </div>
@@ -32,23 +81,24 @@ const AddStudent = () => {
               <input
                 type="text"
                 placeholder="804"
-                name="reg"
-                className="m-2 w-64 h-6 md:w-96"
+                value={registration}
+                onChange={(e) => setRegistration(e.target.value)}
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="name" className="uppercase font-bold block">
                 Class Roll
               </label>
               <input
                 type="text"
                 placeholder="2204"
-                name="roll"
-                className="m-2 w-64 h-6 md:w-96"
+                value={cla}
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
-            </div>
+            </div> */}
             <div className="mb-4">
               <label htmlFor="name" className="uppercase font-bold block">
                 College Id
@@ -56,8 +106,9 @@ const AddStudent = () => {
               <input
                 type="text"
                 placeholder="ex: 1819084"
-                name="id"
-                className="m-2 w-64 h-6 md:w-96"
+                value={collegeId}
+                onChange={(e) => setCollegeId(e.target.value)}
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
             </div>
@@ -67,9 +118,10 @@ const AddStudent = () => {
               </label>
               <input
                 type="text"
-                name="batch"
+                value={batchNo}
+                onChange={(e) => setBatchNo(e.target.value)}
                 placeholder="11th"
-                className="m-2 w-64 h-6 md:w-96"
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
             </div>
@@ -77,10 +129,14 @@ const AddStudent = () => {
               <label htmlFor="name" className="uppercase font-bold block">
                 Department:
               </label>
-              <select name="dept" className="w-64 h-6 md:w-96 " required>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="CIVIL">CIVIL</option>
+              <select
+                name="dept"
+                className="m-2 w-64 h-9 md:w-96 text-lg"
+                required
+              >
+                <option onChange={(e) => setDepartment("CSE")}>CSE</option>
+                <option nChange={(e) => setDepartment("EEE")}>EEE</option>
+                <option Change={(e) => setDepartment("CIVIL")}>CIVIL</option>
               </select>
             </div>
             <div className="mb-4">
@@ -89,9 +145,10 @@ const AddStudent = () => {
               </label>
               <input
                 type="pass"
-                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="****"
-                className="m-2 w-64 h-6 md:w-96"
+                className="m-2 w-64 h-9 md:w-96 text-lg"
               ></input>
             </div>
             <div className="mb-4">
@@ -100,9 +157,10 @@ const AddStudent = () => {
               </label>
               <input
                 type="email"
-                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="johndoe@gmail.com"
-                className="m-2 w-64 h-6 md:w-96"
+                className="m-2 w-64 h-9 md:w-96 text-lg"
                 required
               ></input>
             </div>
@@ -112,15 +170,26 @@ const AddStudent = () => {
               </label>
               <input
                 type="phone"
-                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="019********"
-                className="m-2 w-64 h-6 md:w-96"
+                className="m-2 w-64 h-9 md:w-96 text-lg"
+              ></input>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="name" className="uppercase font-bold block">
+                Upload a photo
+              </label>
+              <input
+                type="file"
+                className=" w-94 h-9 md:w-96 text-lg"
+                onChange={(e) => setImage(e.target.files[0])}
               ></input>
             </div>
             <input
               type="submit"
               value="Add Student"
-              className="w-64 md:w-96 bg-blue-900 text-white rounded p-2 text-center"
+              className="w-64 md:w-96 text-lg bg-blue-500 text-white rounded p-2 text-center hover:bg-blue-900"
             />
           </form>
         </div>

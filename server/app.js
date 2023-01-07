@@ -8,6 +8,7 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const User = require('./models/user')
 const bookRoute = require('./routes/bookRoute')
+const userRoute = require('./routes/userRoute')
 
 // env configuration
 env.config();
@@ -34,6 +35,7 @@ console.log(__dirname+'/public')
 // Routes
 app.use('/admin', adminRoute)
 app.use('/book',bookRoute)
+app.use('/user', userRoute)
 app.use("/image" ,express.static("/images"))
 const PORT = process.env.PORT || 4000;
 
