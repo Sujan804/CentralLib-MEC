@@ -10,7 +10,6 @@ const AddBooks = () => {
   const [isbn, setIsbn] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  console.log(image, 12);
 
   const handleSubmit = (event) => {
     event.preventDefault();

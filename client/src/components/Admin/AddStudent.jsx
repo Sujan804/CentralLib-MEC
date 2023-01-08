@@ -12,28 +12,23 @@ const AddStudent = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("registration", registration);
+    formData.append("batchNo", batchNo);
+    formData.append("department", department);
+    formData.append("collegeId", collegeId);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    formData.append("image", image);
+    console.log(formData);
     try {
-      const result = await axios.post(
-        "http://localhost:5000/user",
-        {
-          name,
-          registration,
-          collegeId,
-          batchNo,
-          department,
-          email,
-          phone,
-          password,
-          image,
-        },
-        {
-          "Content-Type": "multipart/form-data",
-        }
-      );
+      const result = await axios.post("http://localhost:5000/user", formData, {
+        "Content-Type": "multipart/form-data",
+      });
       setName("");
       setBatchNo("");
       setDepartment("CSE");
@@ -132,11 +127,18 @@ const AddStudent = () => {
               <select
                 name="dept"
                 className="m-2 w-64 h-9 md:w-96 text-lg"
+                onChange={(e) => setDepartment(e.target.value)}
                 required
               >
-                <option onChange={(e) => setDepartment("CSE")}>CSE</option>
-                <option nChange={(e) => setDepartment("EEE")}>EEE</option>
-                <option Change={(e) => setDepartment("CIVIL")}>CIVIL</option>
+                <option name="dept" value="CSE">
+                  CSE
+                </option>
+                <option name="dept" value="EEE">
+                  EEE
+                </option>
+                <option name="dept" value="CIVIL">
+                  CIVIL
+                </option>
               </select>
             </div>
             <div className="mb-4">

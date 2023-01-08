@@ -1,9 +1,57 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useReducer, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import profilePic from "../../assets/images/profile.jpg";
 import AdminSidebar from "./Sidebar/AdminSidebar";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        loading: false,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 const SearchStudents = () => {
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: true,
+  });
+  const [students, setStudent] = useState([]);
+  try {
+    useEffect(() => {
+      dispatch({ type: "FETCH_REQUEST" });
+      const fetchStudents = async () => {
+        const { data } = await axios.get("http://localhost:5000/user/all");
+        setStudent(data);
+        dispatch({ type: "FETCH_SUCCESS" });
+      };
+      fetchStudents();
+      // console.log(books);
+    }, []);
+  } catch (error) {
+    dispatch({ type: "FETCH_FAIL" });
+  }
+  // console.log(books);
+  const deptMap = {
+    CSE: "Computer Science and Engineering",
+    EEE: "Electrical and Electronics Engineering",
+    CIVIL: "Civil Engineering",
+  };
   return (
     <section className="grid grid-cols-12  min-h-screen">
       <div className="col-span-1 md:col-span-2">
@@ -38,29 +86,38 @@ const SearchStudents = () => {
           </div>
         </div>
         <div>
-          <div className="flex gap-3 md:gap-8 m-4 md:m-24 outline-double p-2">
-            <div className="items-center flex">
-              <img
-                src={profilePic}
-                alt=""
-                className="w-24 h-24 rounded-full outline-double"
-              />
+          {students.map((student) => (
+            <div
+              className="flex gap-3 md:gap-8 m-4 md:m-24 outline-double p-2"
+              key={student.image}
+            >
+              <div className="items-center flex">
+                <img
+                  src={
+                    `http://localhost:5000/images/${student.image}` ||
+                    `${profilePic}`
+                  }
+                  alt=""
+                  className="w-24 h-24 rounded-full outline-double"
+                />
+              </div>
+              <div>
+                <p className="text-xl font-bold">
+                  {student.name}({student.collegeId})
+                </p>
+                <p>{deptMap[student.department]}</p>
+                <p>Batch: {student.batchNo}</p>
+                <p>Reg No: {student.registration}</p>
+              </div>
+              <div className="items-end flex">
+                <Link to="/admin/student/1">
+                  <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
+                    View Student
+                  </button>
+                </Link>
+              </div>
             </div>
-            <div>
-              <p className="text-xl font-bold">John Doe(1819084)</p>
-              <p>Computer Science and Engineering</p>
-              <p>Session: 2018-19</p>
-              <p>Class Rol: 2204</p>
-              <p>Reg No: 804</p>
-            </div>
-            <div className="items-end flex">
-              <Link to="/admin/student/1">
-                <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
-                  View Student
-                </button>
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

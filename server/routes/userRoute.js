@@ -1,14 +1,17 @@
 const express = require('express');
-const Book = require('../models/user');
+const User = require('../models/user');
 const router = express.Router();
 const upload = require('../tools/uploadMiddleware')
 
 
 
 // Add a book
-router.post('', upload.single('image'), (req, res) => {
-  console.log(req.file)
-  const user = new Book({
+router.post('',  upload.single('image'), (req, res) => {
+  const image = null
+  if(req.file){
+    const image = req.file.filename
+  }
+  const NewUser = new User({
     name: req.body.name,
     registration: req.body.registration,
     collegeId: req.body.collegeId,
@@ -17,21 +20,49 @@ router.post('', upload.single('image'), (req, res) => {
     email: req.body.email,
     phone: req.body.phone,
     password : req.body.password,
-    image: req.file.filename,
+    image: image,
     isAdmin: false
   });
-  console.log(user)
-  user.save((error) => {
+  console.log(NewUser)
+  NewUser.save((error) => {
     if (error) {
       console.log(error)
       res.status(500).send(error);
     } else {
-      res.status(201).send(user);
+      res.status(201).send(NewUser);
     }
   });
 });
 
-
+//Route for all students
+router.get('/all', async (req, res) => {
+  try {
+    const users = await User.find();
+    console.log(users)
+    res.send(users);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+// router.get('', (req, res) => {
+//   const query = {};
+//   if (req.query.title) {
+//     query.title = { $regex: req.query.title, $options: 'i' };
+//   }
+//   if (req.query.author) {
+//     query.author = { $regex: req.query.author, $options: 'i' };
+//   }
+//   if (req.query.department) {
+//     query.department = req.query.department;
+//   }
+//   Book.find(query, (error, books) => {
+//     if (error) {
+//       res.status(500).send(error);
+//     } else {
+//       res.send(books);
+//     }
+//   });
+// });
 // // Update a book
 // router.put('/:id', (req, res) => {
 //   Book.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, book) => {
