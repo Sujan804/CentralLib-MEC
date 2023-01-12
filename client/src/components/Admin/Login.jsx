@@ -1,62 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Login() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [errFlag, setErrFlag] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:5000/admin", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.data.success) {
-          navigate("/admin");
-          // } else {
-        }
-      });
-  }, []);
-
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const collegeId = id;
-    await axios
-      .post("http://localhost:5000/admin/login", {
-        collegeId,
-        password,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          localStorage.setItem("token", res.data.token);
-          console.log(res.data);
-          navigate("/admin");
-        } else {
-          setError(res.data.message);
-          setError(true);
-          setTimeout(() => {
-            setErrFlag(false);
-            setError("");
-          }, 3000);
-        }
-      })
-      .catch((err) => {
-        navigate("/admin/login");
-        setError(err.message);
-        setError(true);
-        setTimeout(() => {
-          setErrFlag(false);
-          setError("");
-        }, 3000);
-      });
-  };
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -69,16 +15,14 @@ export default function Login() {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form onSubmit={onSubmitHandler}>
+            <form>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Login</p>
               </div>
               <div>
-                {errFlag && (
-                  <p className="text-red-700 bg-blue-200 rounded-md py-3 px-6">
-                    {error}
-                  </p>
-                )}
+                <p className="text-red-700 bg-blue-200 rounded-md py-3 px-6">
+                  Error
+                </p>
               </div>
               <div className="mb-6">
                 <input
@@ -126,12 +70,14 @@ export default function Login() {
 
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?
-                  <a
-                    href="#!"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                  >
-                    Register
-                  </a>
+                  <Link to="/admin/mec/signup">
+                    <a
+                      href="#!"
+                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                    >
+                      Register
+                    </a>
+                  </Link>
                 </p>
               </div>
             </form>

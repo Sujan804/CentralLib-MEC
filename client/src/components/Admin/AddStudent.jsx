@@ -24,6 +24,7 @@ const AddStudent = () => {
     formData.append("phone", phone);
     formData.append("password", password);
     formData.append("image", image);
+    formData.append("isAdmin", false);
     console.log(formData);
     try {
       const result = await axios.post("http://localhost:5000/user", formData, {

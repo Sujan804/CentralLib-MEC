@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,28 +9,7 @@ export default function SignUp() {
   const [refId, setRefId] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const onSubmitHandler = async (e) => {
-    const collegeId = id;
-    const isAdmin = true;
-    e.preventDefault();
-    await axios
-      .post("http://localhost:5000/admin/signup", {
-        name,
-        collegeId,
-        password,
-        isAdmin,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          navigate("/admin/login");
-          setError("ADDED Successfully");
-          console.log("Successfully created");
-        }
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  };
+  const onSubmitHandler = async (e) => {};
 
   return (
     <section className="h-screen">

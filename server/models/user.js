@@ -4,7 +4,7 @@ const userSchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        require: true
+        // require: true
     },
     registration:{
         type: String,
@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
     email:{
         type: String,
         trim: true,
-        require: true,
+        // require: true,
     },
     phone:{
         type: String,
@@ -42,7 +42,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         trim:true,
-        require: true
+        // require: true
     },
     joined: {
         type: Date,

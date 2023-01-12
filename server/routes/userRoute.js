@@ -7,24 +7,23 @@ const upload = require('../tools/uploadMiddleware')
 
 // Add a book
 router.post('',  upload.single('image'), (req, res) => {
-  const image = null
-  if(req.file){
-    const image = req.file.filename
-  }
-  const NewUser = new User({
-    name: req.body.name,
-    registration: req.body.registration,
-    collegeId: req.body.collegeId,
-    batchNo: req.body.batchNo,
-    department: req.body.department,
-    email: req.body.email,
-    phone: req.body.phone,
-    password : req.body.password,
-    image: image,
-    isAdmin: false
-  });
-  console.log(NewUser)
-  NewUser.save((error) => {
+  const image = req.file.filename
+  if(req.body.isAdmin === "false"){
+    console.log('Hello')
+    const NewUser = new User({
+      name: req.body.name,
+      registration: req.body.registration,
+      collegeId: req.body.collegeId ,
+      batchNo: req.body.batchNo,
+      department: req.body.department,
+      email: req.body.email,
+      phone: req.body.phone,
+      password : req.body.password,
+      image: image,
+      isAdmin: false
+    });
+    console.log(NewUser)
+    NewUser.save((error) => {
     if (error) {
       console.log(error)
       res.status(500).send(error);
@@ -32,6 +31,11 @@ router.post('',  upload.single('image'), (req, res) => {
       res.status(201).send(NewUser);
     }
   });
+  }else{
+
+  }
+ 
+  
 });
 
 //Route for all students

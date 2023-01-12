@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useReducer, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import profilePic from "../../assets/images/profile.jpg";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const reducer = (state, action) => {
   switch (action.type) {
@@ -93,10 +92,7 @@ const SearchStudents = () => {
             >
               <div className="items-center flex">
                 <img
-                  src={
-                    `http://localhost:5000/images/${student.image}` ||
-                    `${profilePic}`
-                  }
+                  src={`http://localhost:5000/images/${student.image}`}
                   alt=""
                   className="w-24 h-24 rounded-full outline-double"
                 />
