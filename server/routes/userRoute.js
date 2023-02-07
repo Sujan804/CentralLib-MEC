@@ -5,7 +5,7 @@ const upload = require('../tools/uploadMiddleware')
 
 
 
-// Add a book
+
 router.post('',  upload.single('image'), (req, res) => {
   const image = req.file.filename
   if(req.body.isAdmin === "false"){
@@ -32,7 +32,23 @@ router.post('',  upload.single('image'), (req, res) => {
     }
   });
   }else{
-
+    const NewUser = new User({
+      name: req.body.name,
+      collegeId: req.body.collegeId ,
+      email: req.body.email,
+      password : req.body.password,
+      image: image,
+      isAdmin: true
+    });
+    const refId = User.find({id:id});
+    if(refId){
+      User.save()
+      res.send("User succesfully signed in");
+      console.log("success")
+    }else{
+      res.send("failed");
+      console.log("fail");
+    }
   }
  
   

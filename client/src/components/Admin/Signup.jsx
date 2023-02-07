@@ -9,7 +9,10 @@ export default function SignUp() {
   const [refId, setRefId] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const onSubmitHandler = async (e) => {};
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    console.log(name, id, password);
+  };
 
   return (
     <section className="h-screen">

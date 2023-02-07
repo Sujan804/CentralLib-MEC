@@ -2,3 +2,8 @@
 .env File is not working in src/database/connect.js
 >>>Solution:
     Have to require dotenv and config
+
+26-01-23:
+    1.User Login
+    2.User Book request
+    3.User Profile view 

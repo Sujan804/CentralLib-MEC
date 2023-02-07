@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const onSubmitHandler = () => {
+    console.log(id, password);
+  };
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -15,7 +18,7 @@ export default function Login() {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={onSubmitHandler}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Login</p>
               </div>
