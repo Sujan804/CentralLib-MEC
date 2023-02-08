@@ -1,62 +1,42 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Store } from "../../Store";
+
 export default function Login() {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [errFlag, setErrFlag] = useState(false);
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/admin";
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:5000/admin", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.data.success) {
-          navigate("/admin");
-          // } else {
-        }
-      });
-  }, []);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const collegeId = id;
-    await axios
-      .post("http://localhost:5000/admin/login", {
-        collegeId,
+    const isAdmin = true;
+    try {
+      const { data } = await Axios.post("http://localhost:5000/user/signin", {
+        email,
         password,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          localStorage.setItem("token", res.data.token);
-          console.log(res.data);
-          navigate("/admin");
-        } else {
-          setError(res.data.message);
-          setError(true);
-          setTimeout(() => {
-            setErrFlag(false);
-            setError("");
-          }, 3000);
-        }
-      })
-      .catch((err) => {
-        navigate("/admin/login");
-        setError(err.message);
-        setError(true);
-        setTimeout(() => {
-          setErrFlag(false);
-          setError("");
-        }, 3000);
+        isAdmin,
       });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/admin");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -74,18 +54,16 @@ export default function Login() {
                 <p className="mb-4 mr-4 text-3xl">Admin Login</p>
               </div>
               <div>
-                {errFlag && (
-                  <p className="text-red-700 bg-blue-200 rounded-md py-3 px-6">
-                    {error}
-                  </p>
-                )}
+                <p className="text-red-700 bg-blue-200 rounded-md py-3 px-6">
+                  Error
+                </p>
               </div>
               <div className="mb-6">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="ex: 1819084"
                 />
               </div>
@@ -126,12 +104,14 @@ export default function Login() {
 
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?
-                  <a
-                    href="#!"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                  >
-                    Register
-                  </a>
+                  <Link to="/admin/mec/signup">
+                    <a
+                      href="#!"
+                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                    >
+                      Register
+                    </a>
+                  </Link>
                 </p>
               </div>
             </form>

@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/images/MEC_LOGO.png';
 import ProfilePic from '../../assets/images/profile.jpg';
+import { Store } from "../../Store";
 import { Links } from './Links';
 const Navbar = () => {
-   const [open, setOpen] = useState(false);
-   const [logged, setLogged] = useState(false)
+    const [open, setOpen] = useState(false)
+      const navigate = useNavigate();
+      const { state, dispatch: ctxDispatch } = useContext(Store);
+      const { userInfo } = state;
+      console.log(userInfo)
+    //   useEffect(() => {
+    //     if (!userInfo) {
+    //       navigate("login");
+    //     }
+    //   }, [userInfo, navigate]);
+    const logoutHandler = (e)=>{
+        e.preventDefault()
+        ctxDispatch({ type: 'USER_SIGNOUT' });
+        localStorage.removeItem('userInfo');
+        window.location.href = '/';
+    }
   return (
    <nav className='bg-slate-600 text-white p-2 '>
     <div >
@@ -27,20 +42,32 @@ const Navbar = () => {
             <ul className=' md:flex hidden uppercase items-center gap-8 list-none text-black no-underline font-extralight'>
                 <Links/>
             </ul>
-            <div onClick={()=>{setLogged(!logged)}}>
-                {logged?
+            <div >
+                {!userInfo?
                     <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
                         <Link to="/login" className=' text-white no-underline'>
                            <button className='px-9 py-3 rounded-sm bg-blue-600 text-white hover:bg-blue-800 border-none'>Login</button>
                         </Link>
                     </div>
                     :
-                    <div className='hidden md:block'>
-                       <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
-                       <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
-                            <p className='text-gray-300'>Sujan Ahmed</p>
-                        </Link>
-                    </div>
+                    <div className='flex'>
+                        <div className='hidden md:block'>
+                            <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
+                                <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
+                                <p className='text-gray-300'>{userInfo.name}</p>
+                            </Link>
+                        </div>
+                        <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
+                         
+                            <button onClick={logoutHandler} className='px-9 py-3 rounded-sm bg-red-600 text-white hover:bg-red-800 border-none'>Logout</button>
+                       
+                        </div>
+                     </div>
+
+                    
+                    
+                    
+                    
                 }
             </div>
            
@@ -56,20 +83,27 @@ const Navbar = () => {
             >
             {/* <li><Link to='/' className='py-7 px-2 inline-block'>Home</Link></li> */}
             <Links/>
-            <div onClick={()=>{setLogged(!logged)}}>
-            { logged?
+            <div >
+            { userInfo?
                     <div className='flex md:gap-2'>
                         <Link to="/login" className=' text-white no-underline'>
                            <button className='px-12 py-3 rounded-sm bg-blue-600 text-white hover:bg-blue-800 border-none'>Login</button>
                         </Link>
                     </div>
                     :
-                    <div className='md:block'>
-                       <Link to="/profile" className=' text-white no-underline flex gap-4 text-center items-center '>
+                    <div className='flex-col md:flex'>
+                    <div className='hidden md:block'>
+                        <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
                             <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
                             <p className='text-gray-300'>Sujan Ahmed</p>
                         </Link>
                     </div>
+                    <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
+                        <Link to="/login" className=' text-white no-underline'>
+                        <button className='px-9 py-3 rounded-sm bg-red-600 text-white hover:bg-red-800 border-none'>Logout</button>
+                        </Link>
+                    </div>
+                 </div>
             }
             </div>
           
