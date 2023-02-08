@@ -1,6 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import Axios from "axios";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Store } from "../Store";
 export default function Login() {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+
+  const { userInfo } = state;
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await Axios.post("/api/users/signin", {
+        email,
+        password,
+      });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/");
+    } catch (err) {
+      toast.error(err);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate(redirect);
+  //   }
+  // }, [navigate, redirect, userInfo]);
+
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -19,10 +55,11 @@ export default function Login() {
               </div>
               <div className="mb-6">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="collegeId"
-                  placeholder="ex: 1819084"
+                  id="email"
+                  placeholder="johndoe@email.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-6">
@@ -31,6 +68,7 @@ export default function Login() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="userPassword"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
 
@@ -53,6 +91,7 @@ export default function Login() {
               <div className="text-center lg:text-left">
                 <Link to="/profile">
                   <button
+                    onClick={submitHandler}
                     type="button"
                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   >

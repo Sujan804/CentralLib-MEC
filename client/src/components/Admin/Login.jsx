@@ -1,11 +1,42 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import Axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Store } from "../../Store";
+
 export default function Login() {
-  const [id, setId] = useState("");
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/admin";
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onSubmitHandler = () => {
-    console.log(id, password);
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const isAdmin = true;
+    try {
+      const { data } = await Axios.post("http://localhost:5000/user/signin", {
+        email,
+        password,
+        isAdmin,
+      });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/admin");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -29,10 +60,10 @@ export default function Login() {
               </div>
               <div className="mb-6">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="ex: 1819084"
                 />
               </div>

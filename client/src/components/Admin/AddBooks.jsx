@@ -1,8 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Store } from "../../Store";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const AddBooks = () => {
+  const navigate = useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("login");
+    }
+  }, [userInfo, navigate]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [stock, setStock] = useState();

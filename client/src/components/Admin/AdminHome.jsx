@@ -1,10 +1,18 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import profilePic from "../../assets/images/profile.jpg";
+import { Store } from "../../Store";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const AdminHome = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("login");
+    }
+  }, [userInfo, navigate]);
+
   // try {
   //   useEffect(
   //     () => async () => {

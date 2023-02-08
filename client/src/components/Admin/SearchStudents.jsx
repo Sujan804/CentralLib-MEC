@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Store } from "../../Store";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const reducer = (state, action) => {
   switch (action.type) {
@@ -27,6 +28,14 @@ const reducer = (state, action) => {
   }
 };
 const SearchStudents = () => {
+  const navigate = useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("login");
+    }
+  }, [userInfo, navigate]);
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: true,
   });

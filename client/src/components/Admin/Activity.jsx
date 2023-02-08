@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import profile from "../../assets/images/profile.jpg";
+import { Store } from "../../Store";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 const Activity = () => {
+  const navigate = useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("login");
+    }
+  }, [userInfo, navigate]);
   return (
     <section className="grid grid-cols-12  min-h-screen">
       <div className="col-span-1 md:col-span-2">

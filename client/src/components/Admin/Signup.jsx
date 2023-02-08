@@ -1,19 +1,50 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Store } from "../../Store";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/admin/";
+
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [refId, setRefId] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [scretKey, setScretKey] = useState("");
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(name, id, password);
+    console.log(name, password, scretKey);
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    try {
+      const { data } = await Axios.post("http://localhost:5000/user/signup", {
+        name,
+        email,
+        password,
+        scretKey,
+      });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/admin");
+    } catch (err) {
+      toast.error(err.message, "Sujan");
+    }
   };
-
+  console.log(userInfo);
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -30,7 +61,7 @@ export default function SignUp() {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="mb-4 mr-4 text-3xl">Admin Signup</p>
               </div>
-              <p>{error}</p>
+
               <div className="mb-6">
                 <label>Name</label>
                 <input
@@ -45,14 +76,14 @@ export default function SignUp() {
                 />
               </div>
               <div className="mb-6">
-                <label>Make a Id(Please remember it)</label>
+                <label>Email</label>
                 <input
-                  type="text"
+                  type="Email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="collegeId"
-                  placeholder="ex: 1819084"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
+                  id="email"
+                  placeholder="johndoe@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-6">
@@ -80,20 +111,21 @@ export default function SignUp() {
                 />
               </div>
               <div className="mb-6">
-                <label>Refference Id(Any existing Admin Id)</label>
+                <label>Secret Key</label>
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="collegeId"
-                  placeholder="ex: 1819084"
-                  value={refId}
+                  placeholder=""
+                  value={scretKey}
                   onChange={(e) => {
-                    setRefId(e.target.value);
+                    setScretKey(e.target.value);
                   }}
                 />
               </div>
               <div className="text-center lg:text-left">
                 <input
+                  onSubmit={onSubmitHandler}
                   className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   type="submit"
                   value="SignUp"
