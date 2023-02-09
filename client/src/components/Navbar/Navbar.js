@@ -10,12 +10,8 @@ const Navbar = () => {
       const navigate = useNavigate();
       const { state, dispatch: ctxDispatch } = useContext(Store);
       const { userInfo } = state;
-      console.log(userInfo)
-    //   useEffect(() => {
-    //     if (!userInfo) {
-    //       navigate("login");
-    //     }
-    //   }, [userInfo, navigate]);
+
+
     const logoutHandler = (e)=>{
         e.preventDefault()
         ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -52,10 +48,19 @@ const Navbar = () => {
                     :
                     <div className='flex'>
                         <div className='hidden md:block'>
-                            <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
-                                <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
-                                <p className='text-gray-300'>{userInfo.name}</p>
-                            </Link>
+                            {
+                                userInfo.isAdmin?
+                                <Link to="/admin" className=' text-white no-underline pr-4 flex gap-4 items-center'>
+                                    <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
+                                    <p className='text-gray-300'>{userInfo.name}</p>
+                                </Link>
+                                :
+                                <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
+                                    <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
+                                    <p className='text-gray-300'>{userInfo.name}</p>
+                                </Link>
+                            }
+                            
                         </div>
                         <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
                          
@@ -63,10 +68,6 @@ const Navbar = () => {
                        
                         </div>
                      </div>
-
-                    
-                    
-                    
                     
                 }
             </div>
@@ -84,26 +85,35 @@ const Navbar = () => {
             {/* <li><Link to='/' className='py-7 px-2 inline-block'>Home</Link></li> */}
             <Links/>
             <div >
-            { userInfo?
+            { userInfo ?
+                    <div className='flex justify-evenly'>
+                        <div className=' md:hidden'>
+                            {
+                                userInfo.isAdmin?
+                                <Link to="/admin" className=' text-white no-underline pr-4 flex gap-4 items-center'>
+                                    <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
+                                    <p className='text-gray-300'>{userInfo.name}</p>
+                                </Link>
+                                :
+                                <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
+                                    <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
+                                    <p className='text-gray-300'>{userInfo.name}</p>
+                                </Link>
+
+                            }
+                            
+                        </div>
+                        <div className='md:flex md:gap-2 justify-evenly  md:hidden'>
+                            <button className=' text-white no-underline px-9 py-3 rounded-sm bg-red-600 text-white hover:bg-red-800 border-none'>Logout</button>
+                        </div>
+                    </div>
+                    :
                     <div className='flex md:gap-2'>
                         <Link to="/login" className=' text-white no-underline'>
                            <button className='px-12 py-3 rounded-sm bg-blue-600 text-white hover:bg-blue-800 border-none'>Login</button>
                         </Link>
                     </div>
-                    :
-                    <div className='flex-col md:flex'>
-                    <div className='hidden md:block'>
-                        <Link to="/profile" className=' text-white no-underline pr-4 flex gap-4 items-center'>
-                            <img src={ProfilePic} alt="Profile" className= "w-10 h-10 outline-double rounded-full " />
-                            <p className='text-gray-300'>Sujan Ahmed</p>
-                        </Link>
-                    </div>
-                    <div className='md:flex md:gap-2 justify-evenly hidden md:block'>
-                        <Link to="/login" className=' text-white no-underline'>
-                        <button className='px-9 py-3 rounded-sm bg-red-600 text-white hover:bg-red-800 border-none'>Logout</button>
-                        </Link>
-                    </div>
-                 </div>
+                    
             }
             </div>
           
