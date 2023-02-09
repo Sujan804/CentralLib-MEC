@@ -26,12 +26,15 @@ export default function SignUp() {
       return;
     }
     try {
-      const { data } = await Axios.post("http://localhost:5000/user/signup", {
-        name,
-        email,
-        password,
-        scretKey,
-      });
+      const { data } = await Axios.post(
+        "http://localhost:5000/user/admin/signup",
+        {
+          name,
+          email,
+          password,
+          scretKey,
+        }
+      );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/admin");

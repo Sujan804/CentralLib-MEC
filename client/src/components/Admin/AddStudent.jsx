@@ -37,9 +37,13 @@ const AddStudent = () => {
     formData.append("isAdmin", false);
     console.log(formData);
     try {
-      const result = await axios.post("http://localhost:5000/user", formData, {
-        "Content-Type": "multipart/form-data",
-      });
+      const result = await axios.post(
+        "http://localhost:5000/user/add-user",
+        formData,
+        {
+          "Content-Type": "multipart/form-data",
+        }
+      );
       setName("");
       setBatchNo("");
       setDepartment("CSE");

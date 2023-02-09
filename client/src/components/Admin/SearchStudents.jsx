@@ -94,35 +94,38 @@ const SearchStudents = () => {
           </div>
         </div>
         <div>
-          {students.map((student) => (
-            <div
-              className="flex gap-3 md:gap-8 m-4 md:m-24 outline-double p-2"
-              key={student.image}
-            >
-              <div className="items-center flex">
-                <img
-                  src={`http://localhost:5000/images/${student.image}`}
-                  alt=""
-                  className="w-24 h-24 rounded-full outline-double"
-                />
-              </div>
-              <div>
-                <p className="text-xl font-bold">
-                  {student.name}({student.collegeId})
-                </p>
-                <p>{deptMap[student.department]}</p>
-                <p>Batch: {student.batchNo}</p>
-                <p>Reg No: {student.registration}</p>
-              </div>
-              <div className="items-end flex">
-                <Link to="/admin/student/1">
-                  <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
-                    View Student
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
+          {students.map(
+            (student) =>
+              !student.isAdmin && (
+                <div
+                  className="flex gap-3 md:gap-8 m-4 md:m-24 outline-double p-2"
+                  key={student.image}
+                >
+                  <div className="items-center flex">
+                    <img
+                      src={`http://localhost:5000/images/${student.image}`}
+                      alt=""
+                      className="w-24 h-24 rounded-full outline-double"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold">
+                      {student.name}({student.collegeId})
+                    </p>
+                    <p>{deptMap[student.department]}</p>
+                    <p>Batch: {student.batchNo}</p>
+                    <p>Reg No: {student.registration}</p>
+                  </div>
+                  <div className="items-end flex">
+                    <Link to="/admin/student/1">
+                      <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
+                        View Student
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              )
+          )}
         </div>
       </div>
     </section>

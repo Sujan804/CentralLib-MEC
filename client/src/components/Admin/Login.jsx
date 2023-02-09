@@ -19,11 +19,14 @@ export default function Login() {
     e.preventDefault();
     const isAdmin = true;
     try {
-      const { data } = await Axios.post("http://localhost:5000/user/signin", {
-        email,
-        password,
-        isAdmin,
-      });
+      const { data } = await Axios.post(
+        "http://localhost:5000/user/admin/signin",
+        {
+          email,
+          password,
+          isAdmin,
+        }
+      );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/admin");
