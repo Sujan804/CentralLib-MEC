@@ -1,9 +1,22 @@
-
 .env File is not working in src/database/connect.js
->>>Solution:
+
+> > > Solution:
+
     Have to require dotenv and config
 
-26-01-23:
-    1.User Login
-    2.User Book request
-    3.User Profile view 
+> > > > 26-01-23:
+> > > > 1.User Login
+> > > > 2.User Book request
+> > > > 3.User Profile view
+
+> > > > > > 11-02-23:
+> > > > > > 1.User Dashboard
+> > > > > > 2.Search Implementation
+> > > > > > 3.User Delete
+> > > > > > 4.User Edit
+> > > > > > 5.Book Delete
+> > > > > > 6.Edit Book
+
+> > > > > Work to be Implemented:
+> > > > > 1.User Book Request
+> > > > > 2.Admin Book Request accept/reject
