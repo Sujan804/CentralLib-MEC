@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useReducer, useState } from "react";
+import { Link } from "react-router-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -71,9 +72,11 @@ const BookView = () => {
                 Available: {book.available || 0}
               </h1>
             </div>
-            <button className="p-2 bg-red-700 hover:bg-red-800 bold border-spacing-7 text-white min-w-full rounded-b-md ">
-              Send Request for the book
-            </button>
+            <Link to={`/book/${book._id}`}>
+              <button className="p-2 bg-red-700 hover:bg-red-800 bold border-spacing-7 text-white min-w-full rounded-b-md ">
+                Request
+              </button>
+            </Link>
           </div>
         </div>
       ))}
