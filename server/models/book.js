@@ -13,7 +13,7 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  stock: {
+  available: {
     type: Number,
     default: 0,
     required: false

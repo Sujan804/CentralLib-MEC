@@ -22,6 +22,7 @@ import Home from './components/Home';
 import InstitutionalRepo from './components/InstitutionalRepo';
 import Login from './components/Login';
 import Navbar from './components/Navbar/Navbar';
+import SingleBookView from './components/SingleBookView';
 import StudentDash from './components/StudentDash';
 function App() {
   return(
@@ -36,6 +37,7 @@ function App() {
           <Route path='/e-journals' element={<EJournal/>}></Route>  
           <Route path='/e-books' element={<EBooks/>}></Route>
           <Route path='/institutional-repository' element={<InstitutionalRepo/>}></Route>
+          <Route path= '/book/:book_id/' element = {<SingleBookView/>}/>
 
           {/* Admin Route */}
           <Route path='/admin' element = {<AdminHome/>}/>
