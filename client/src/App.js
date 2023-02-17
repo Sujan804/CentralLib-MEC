@@ -48,11 +48,10 @@ function App() {
           <Route path='/admin/search-students' element={<SearchStudents/>}></Route>
           <Route path='/admin/search-books' element={<SearchBooks/>}></Route>
           <Route path='/admin/settings' element={<Settings/>}></Route>
-          <Route path='/admin/student/:id' element={<ViewStudent/>}></Route>
+          <Route path='/admin/student/:student_id' element={<ViewStudent/>}></Route>
           <Route path='/admin/book/:id' element ={<UpdateBook/>}></Route>
           <Route path='/admin/mec/signup'  element= {<SignUp/>}/>
           <Route path='/admin/login' element={<LoginAdmin/>}/>
-
         </Routes>
         <ToastContainer position="bottom-center" limit={1} />
       <Footer/>

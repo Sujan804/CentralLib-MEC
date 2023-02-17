@@ -1,18 +1,60 @@
-import React from "react";
-import profilePic from "../assets/images/profile.jpg";
+import React, { useContext, useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+import { Store } from "../Store";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        loading: false,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 const StudentDash = () => {
+  const navigate = useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: true,
+  });
+  const found = false;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("login");
+    }
+  }, [userInfo, navigate]);
+  console.log(userInfo);
+  const deptMap = {
+    CSE: "Computer Science and Engineering",
+    EEE: "Electrical and Electronics Engineering",
+    CIVIL: "Civil Engineering",
+  };
   return (
     <section className="mt-10 min-h-screen">
       <div className="mx-auto text-center">
         <img
-          src={profilePic}
-          alt=""
+          src={`http://localhost:5000/images/${userInfo.user.image}`}
+          alt="ProfilePic"
           className="w-28 h-28 rounded-full outline-double"
         ></img>
-        <h1>Mr John Doe</h1>
-        <h2 className="text-lg">1819084</h2>
+        <h1>{userInfo.user.name}</h1>
+        <h2 className="text-lg">{userInfo.user.registration}</h2>
         <p>Session: 2018-19</p>
-        <p>Computer Science and Engineering</p>
+        <p>Department: {deptMap[userInfo.user.department]}</p>
         <button className="my-2 py-1 px-2 bg-yellow-500 hover:bg-yellow-600">
           Update Profile
         </button>

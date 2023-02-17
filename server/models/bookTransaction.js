@@ -16,6 +16,10 @@ const bookTransactionSchema = new mongoose.Schema({
     enum: ['borrow', 'return'],
     required: true
   },
+  status: {
+    type: String,
+    enum: ['accepted', 'rejected', 'untracked']
+  },
   date: {
     type: Date,
     required: true
