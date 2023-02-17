@@ -117,7 +117,7 @@ const SearchStudents = () => {
                     <p>Reg No: {student.registration}</p>
                   </div>
                   <div className="items-end flex">
-                    <Link to="/admin/student/1">
+                    <Link to={`/admin/student/${student._id}`}>
                       <button className="bg-blue-800 hover:bg-blue-900 text-white p-2 items-center flex">
                         View Student
                       </button>

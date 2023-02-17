@@ -145,10 +145,7 @@ router.post("/student/signin", expressAsyncHandler(async (req,res)=>{
   if(user){
     if(user.password === req.body.password){
       res.send({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
+        user,
         token: generateToken(user)
       })
       return;
@@ -158,6 +155,18 @@ router.post("/student/signin", expressAsyncHandler(async (req,res)=>{
     message: "invalid email or password"
   })
 }))
+router.get('/:id', (req, res) => {
+  console.log("hello id", req.params.id)
+  User.findById(req.params.id, (error, user) => {
+    if (error) {
+      res.status(500).send(error);
+    } else if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send();
+    }
+  });
+});
 
 // // Update a book
 // router.put('/:id', (req, res) => {

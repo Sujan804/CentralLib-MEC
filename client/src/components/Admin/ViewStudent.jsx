@@ -1,18 +1,66 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import profilePic from "../../assets/images/profile.jpg";
+import axios from "axios";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Store } from "../../Store";
 import AdminSidebar from "./Sidebar/AdminSidebar";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        loading: false,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 const ViewStudent = () => {
+  const params = useParams();
+  const { student_id } = params;
+  console.log(student_id);
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: true,
+  });
+  const found = false;
+  const [student, setStudent] = useState([]);
   useEffect(() => {
     if (!userInfo) {
       navigate("login");
     }
+    dispatch({ type: "FETCH_REQUEST" });
+    const fetchBook = async () => {
+      const { data } = await axios.get(
+        "http://localhost:5000/user/63e48660a89bf9854f0ae463"
+      );
+      console.log("data", data);
+      setStudent(data);
+      dispatch({ type: "FETCH_SUCCESS" });
+    };
+    fetchBook();
   }, [userInfo, navigate]);
-
+  console.log(student);
+  // if (student.length === 0) {
+  //   return (
+  //     <h1 className="text-red-700 min-h-screen text-center mt-16">
+  //       Student not Found 404!
+  //     </h1>
+  //   );
+  // }
   return (
     <section className="grid grid-cols-12  min-h-screen">
       <div className="col-span-1 md:col-span-2">
@@ -21,20 +69,19 @@ const ViewStudent = () => {
       <div className=" mt-4 col-span-11 md:col-span-10 max-h-screen overflow-auto">
         <div className="mx-auto text-center">
           <img
-            src={profilePic}
+            src={`http://localhost:5000/images/${student.image}`}
             alt=""
             className="w-28 h-28 rounded-full outline-double"
           ></img>
-          <h1>Mr John Doe</h1>
-          <h2 className="text-lg">1819084</h2>
-          <p>Session: 2018-19</p>
-          <p>Computer Science and Engineering</p>
+          <h1>{student.name}</h1>
+          <h2 className="text-lg">{student.registration}</h2>
+          <p>{student.department}</p>
           <p>
-            <a href="mailto:johndoew@gmail.com">johndoe@gmail.com</a>
+            <a href="mailto:johndoew@gmail.com">{student.email}</a>
           </p>
           <p className="mb-3">
             {" "}
-            <a href="tel:1101010">019********</a>
+            <a href="tel:1101010">{student.phone}</a>
           </p>
           <button className=" my-2 py-1  text-white px-2 bg-yellow-700 hover:bg-yellow-800">
             Send Notifications
