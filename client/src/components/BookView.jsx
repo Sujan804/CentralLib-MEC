@@ -26,7 +26,7 @@ const reducer = (state, action) => {
   }
 };
 
-const BookView = () => {
+const BookView = (props) => {
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: true,
   });
@@ -45,13 +45,34 @@ const BookView = () => {
   } catch (error) {
     dispatch({ type: "FETCH_FAIL" });
   }
+
+  ///
+  const { query, queryType } = props;
+  let filteredBooks = [];
+
+  if (queryType === "title") {
+    filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(query.toLowerCase())
+    );
+  } else if (queryType === "author") {
+    filteredBooks = books.filter((book) =>
+      book.author.toLowerCase().includes(query.toLowerCase())
+    );
+  } else if (queryType === "dept") {
+    filteredBooks = books.filter((book) =>
+      book.department.toLowerCase().includes(query.toLowerCase())
+    );
+  } else {
+    filteredBooks = books;
+  }
+
   // console.log(books);
   if (loading) {
     return <h1>Loading...</h1>;
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 ml-6 md:mx-auto">
-      {books.map((book) => (
+      {filteredBooks.map((book) => (
         <div
           key={book.image}
           className=" h-auto w-48 bg-teal-400 rounded-lg hover:shadow-xl mx-12 mb-4 shadow-xl flex-col"
